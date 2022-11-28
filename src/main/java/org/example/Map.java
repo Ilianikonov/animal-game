@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Arrays;
+
 public class Map {
     private int xMax;
     private int yMax;
@@ -39,5 +41,24 @@ public class Map {
             }
         }
     }
+    @Override
+    public String toString() {
+        return "Map{" +
+                "xMax=" + xMax +
+                ", yMax=" + yMax +
+                ", map=" + Arrays.toString(map) +
+                '}';
+    }
+    private void countAnimal (){
+        int counterAnimal = 0;
+        for (int i = 0; i < xMax; i++) {
+            for ( int j = 0; j < yMax; j++){
+                if (map[i][j] == Animal){
+                    counterAnimal++;
+                }
+            }
 
+        }
+        return counterAnimal;
+    }
 }
