@@ -7,6 +7,11 @@ public class Map {
     private int yMax;
     private Item [][] map = new Item[xMax] [yMax];
 
+    public Map(int xMax, int yMax) {
+        this.xMax = xMax;
+        this.yMax = yMax;
+    }
+
     public int getxMax() {
         return xMax;
     }
@@ -34,30 +39,25 @@ public class Map {
  //       }
  //       return zooEst;
 //    }
-    public void monitoringCart (){
-        for (int i = 0; i < getxMax(); i++){
-            for (int j = 0; j < getyMax(); j++){
-                System.out.print(map[i][j]);
-            }
-        }
-    }
     @Override
     public String toString() {
-        return "Map{" +
-                "xMax=" + xMax +
-                ", yMax=" + yMax +
-                ", map=" + Arrays.toString(map) +
-                '}';
+        String stringMap = "{";
+        for (int i = 0; i < getxMax(); i++){
+            for (int j = 0; j < getyMax(); j++){
+                stringMap += map[i][j] + ", ";
+            }
+        }
+        stringMap += "}";
+        return stringMap;
     }
-    private void countAnimal (){
+    private int countAnimal (){
         int counterAnimal = 0;
         for (int i = 0; i < xMax; i++) {
             for ( int j = 0; j < yMax; j++){
-                if (map[i][j] == Animal){
+                if (map[i][j] instanceof Animal){
                     counterAnimal++;
                 }
             }
-
         }
         return counterAnimal;
     }
