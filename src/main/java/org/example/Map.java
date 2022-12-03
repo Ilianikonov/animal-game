@@ -12,6 +12,10 @@ public class Map {
         this.yMax = yMax;
     }
 
+    public Item getMap(int x, int y) {
+        return map[x][y];
+    }
+
     public int getxMax() {
         return xMax;
     }
@@ -41,13 +45,16 @@ public class Map {
 //    }
     @Override
     public String toString() {
-        String stringMap = "{";
+        String stringMap = "";
         for (int i = 0; i < getxMax(); i++){
             for (int j = 0; j < getyMax(); j++){
-                stringMap += map[i][j] + ", ";
+               if (j < (getxMax() - 1)){
+                   stringMap += map[i][j] + " ";
+               } else {
+                   stringMap += map[i][j] + "\n";
+               }
             }
         }
-        stringMap += "}";
         return stringMap;
     }
     private int countAnimal (){
