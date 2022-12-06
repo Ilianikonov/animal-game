@@ -1,15 +1,14 @@
 package org.example;
 
-import java.util.Arrays;
-
 public class Map {
     private int xMax;
     private int yMax;
-    private Item [][] map = new Item[xMax] [yMax];
+    private Item [][] map;
 
     public Map(int xMax, int yMax) {
         this.xMax = xMax;
         this.yMax = yMax;
+        map = new Item[xMax] [yMax];
     }
 
     public Item getMap(int x, int y) {
@@ -49,13 +48,33 @@ public class Map {
         for (int i = 0; i < getxMax(); i++){
             for (int j = 0; j < getyMax(); j++){
                if (j < (getxMax() - 1)){
-                   stringMap += map[i][j] + " ";
+                   stringMap += getSimpleName(map[i][j]) + " ";
                } else {
-                   stringMap += map[i][j] + "\n";
+                   stringMap += getSimpleName(map[i][j]) + "\n";
                }
             }
         }
         return stringMap;
+    }
+    public String getSimpleName(Object object){
+        if (object != null) {
+            String simpleName = object.getClass().getSimpleName();
+            String shortName = "";
+            if (simpleName.length() > 4) {
+                for (int i = 0; i < 4; i++) {
+                    shortName += simpleName.charAt(i);
+                }
+            } else {
+                int countSpace = 4 - simpleName.length();
+                shortName += simpleName;
+                for (int i = 0; i < countSpace; i++) {
+                    shortName += " ";
+                }
+
+            }
+            return shortName;
+        }
+        return null;
     }
     private int countAnimal (){
         int counterAnimal = 0;
