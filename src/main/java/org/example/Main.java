@@ -121,10 +121,6 @@ public  class Main {
        //     }
        //     Thread.sleep(1000);
        // }
-     // Map map = new Map(10,10);
-     // Fox fox = new Fox(new Coordinate(5,7),2,100,50);
-     // map.setItem(fox,fox.getCoordinate());
-       // System.out.println(map.toString());
         MapGenerator.generateMap(10,4,4,4,4,4,10,10);
     }
 }
