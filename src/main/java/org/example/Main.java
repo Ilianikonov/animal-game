@@ -16,7 +16,6 @@ public  class Main {
        // Map carta = new Map();
        // carta.placeOn(foks.getName(), foks.getX(), foks.getY());
        // carta.placeOn(hanter.getName(), hanter.getX(), hanter.getY());
-//
        // while (carta.analizZooNaCarte()) {
        //     System.out.println("*" + hanter.getX() + " " + hanter.getY() + "*");
        //     System.out.println("/" + foks.getX() + foks.getY() + "/");
@@ -44,7 +43,6 @@ public  class Main {
        //         int minlength = 10000;
        //         int minlengthX = 0;
        //         int minlengthY = 0;
-//
        //         for (int i = 0; i < carta.getxMax(); i++) {
        //             for (int j = 0; j < carta.getyMax(); j++) {
        //                 if (carta.getCart(i, j) == 1) {
@@ -120,8 +118,36 @@ public  class Main {
        //         }
        //     }
        //     Thread.sleep(1000);
-       // }
-        MapGenerator.generateMap(10,4,4,4,4,4,10,10);
+        Map map = MapGenerator.generateMap(10,4,4,4,4,4,10,10);
+        double veroatnostDvigPravo = 0.75;
+        double veroatnostDvigVerh = 0.25;
+        double veroatnostDvigNiz = 0.5;
+        double veroatnostDvig = 0.5;
+        while (map.countAnimal() > 0) {
+            for (int y = 0; y < map.getyMax(); y++) {
+                for (int x = 0; x < map.getxMax(); x++) {
+                    if (map.getMap(x, y) instanceof Animal) {
+                        if (veroatnostDvig > Math.random()) {
+                            double veroatnostNapravlen = Math.random();
+                            if (veroatnostDvigVerh > veroatnostNapravlen && (y + (((Animal) map.getMap(x, y)).getSpeed()) < map.getyMax())) {
+                                map.setItem(map.getMap(x, y), new Coordinate(x, (y + (((Animal) map.getMap(x, y)).getSpeed()))));
+                                map.removeItem(new Coordinate(x, y));
+                            } else if (veroatnostDvigNiz > veroatnostNapravlen && (y - (((Animal) map.getMap(x, y)).getSpeed()) >= 0)) {
+                                map.setItem(map.getMap(x, y), new Coordinate(x, (y - (((Animal) map.getMap(x, y)).getSpeed()))));
+                                map.removeItem(new Coordinate(x, y));
+                            } else if (veroatnostDvigPravo > veroatnostNapravlen && (x + (((Animal) map.getMap(x, y)).getSpeed()) < map.getxMax())) {
+                                map.setItem(map.getMap(x, y), new Coordinate((x + (((Animal) map.getMap(x, y)).getSpeed())), y));
+                                map.removeItem(new Coordinate(x, y));
+                            } else if ((x - (((Animal) map.getMap(x, y)).getSpeed()) >= 0)) {
+                                map.setItem(map.getMap(x, y), new Coordinate((x - (((Animal) map.getMap(x, y)).getSpeed())), y));
+                                map.removeItem(new Coordinate(x, y));
+                            }
+                        }
+                    }
+                }
+            }
+            System.out.println(map.toString());
+        }
     }
 }
 

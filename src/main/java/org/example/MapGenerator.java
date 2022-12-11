@@ -19,36 +19,36 @@ public class MapGenerator {
             Fox fox = new Fox(coordinate, 2, 100, 50);
             map.setItem(fox, fox.getCoordinate());
         }
-//      for (int i = 1; i <= countBear; i++) {
-      //    int coordinatRandom = (int) (Math.random() *arrayFreeElements.length);
-      //        Bear bear = new Bear(new Coordinate(arrayFreeElements[coordinatRandom][0], arrayFreeElements[coordinatRandom][1]), 2, 100, 50);
-      //        map.setItem(bear, bear.getCoordinate());
-      //        arrayFreeElements = ArrayUtils.remove(arrayFreeElements,coordinatRandom);
-      //}
-      //for (int i = 1; i <= countBerries; i++) {
-      //    int coordinatRandom = (int) (Math.random() *arrayFreeElements.length);
-      //    Berries berries = new Berries(new Coordinate(arrayFreeElements[coordinatRandom][0], arrayFreeElements[coordinatRandom][1]));
-      //    map.setItem(berries, berries.getCoordinate());
-      //    arrayFreeElements = ArrayUtils.remove(arrayFreeElements,coordinatRandom);
-      //}
-      //for (int i = 1; i <= countHare; i++) {
-      //    int coordinatRandom = (int) (Math.random() *arrayFreeElements.length);
-      //    Hare hare = new Hare(new Coordinate(arrayFreeElements[coordinatRandom][0], arrayFreeElements[coordinatRandom][1]), 2, 100, 50);
-      //    map.setItem(hare, hare.getCoordinate());
-      //    arrayFreeElements = ArrayUtils.remove(arrayFreeElements,coordinatRandom);
-      //}
-      //for (int i = 1; i <= countHunter; i++) {
-      //    int coordinatRandom = (int) (Math.random() *arrayFreeElements.length);
-      //    Hunter hunter = new Hunter(new Coordinate(arrayFreeElements[coordinatRandom][0], arrayFreeElements[coordinatRandom][1]), 1);
-      //    map.setItem(hunter, hunter.getCoordinate());
-      //    arrayFreeElements = ArrayUtils.remove(arrayFreeElements,coordinatRandom);
-      //}
-      //for (int i = 1; i <= countMouse; i++) {
-      //    int coordinatRandom = (int) (Math.random() *arrayFreeElements.length);
-      //    Mouse mouse = new Mouse(new Coordinate(arrayFreeElements[coordinatRandom][0], arrayFreeElements[coordinatRandom][1]), 2, 100, 50);
-      //    map.setItem(mouse, mouse.getCoordinate());
-      //    arrayFreeElements = ArrayUtils.remove(arrayFreeElements,coordinatRandom);
-      //  }
+        for (int i = 0; i < countBear; i++) {
+            int randomPosition = (int) (Math.random() * arrayList.size());
+            Coordinate coordinate = arrayList.remove(randomPosition);
+            Bear bear = new Bear(coordinate, 2, 100, 50);
+            map.setItem(bear, bear.getCoordinate());
+        }
+        for (int i = 0; i < countBerries; i++) {
+             int randomPosition = (int) (Math.random() * arrayList.size());
+             Coordinate coordinate = arrayList.remove(randomPosition);
+             Berries berries = new Berries(coordinate);
+             map.setItem(berries, berries.getCoordinate());
+        }
+        for (int i = 0; i < countHare; i++) {
+             int randomPosition = (int) (Math.random() * arrayList.size());
+             Coordinate coordinate = arrayList.remove(randomPosition);
+             Hare hare = new Hare(coordinate, 2, 100, 50);
+             map.setItem(hare, hare.getCoordinate());
+        }
+        for (int i = 0; i < countHunter; i++) {
+             int randomPosition = (int) (Math.random() * arrayList.size());
+             Coordinate coordinate = arrayList.remove(randomPosition);
+             Hunter hunter = new Hunter(coordinate, 1);
+             map.setItem(hunter, hunter.getCoordinate());
+        }
+        for (int i = 0; i < countMouse; i++) {
+              int randomPosition = (int) (Math.random() * arrayList.size());
+              Coordinate coordinate = arrayList.remove(randomPosition);
+              Mouse mouse = new Mouse(coordinate, 2, 100, 50);
+              map.setItem(mouse, mouse.getCoordinate());
+        }
         return map;
     }
 }
