@@ -1,6 +1,6 @@
 package org.example;
 
-public class Animal extends MovableItem {
+public class Animal extends MovableItem implements Movement{
     private int hp;
     private int foodLevel;
 
@@ -32,5 +32,13 @@ public class Animal extends MovableItem {
                 "hp=" + hp +
                 ", foodLevel=" + foodLevel +
                 "} " + super.toString();
+
+    }
+    public void trafic(){
+        double veroatnostDvigPravo = 0.75;
+        double veroatnostDvigVerh = 0.25;
+        double veroatnostDvigNiz = 0.5;
+        double veroatnostDvig = 0.3;
+
     }
 }

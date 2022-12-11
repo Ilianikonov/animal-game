@@ -28,20 +28,7 @@ public class Map {
     public void removeItem (Coordinate coordinate){
         map[coordinate.getY()][coordinate.getX()] = null;
     }
-//    public boolean  (){
-//        boolean zooEst = true;
-//        for (int i = 0; i < getxMax(); i++){
-//            for (int j = 0; j < getyMax(); j++){
-//                if (map[i][j] == 0){
-//                    zooEst = false;
-//                } else if (map[i][j] == 1){
-//                    zooEst = true;
-//                    return zooEst;
-//                }
-//            }
- //       }
- //       return zooEst;
-//    }
+
     @Override
     public String toString() {
         String stringMap = "";
@@ -76,7 +63,7 @@ public class Map {
         }
         return null;
     }
-    private int countAnimal (){
+    public int countAnimal (){
         int counterAnimal = 0;
         for (int i = 0; i < xMax; i++) {
             for ( int j = 0; j < yMax; j++){
