@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.ArrayList;
+
 public class Map {
     private int xMax;
     private int yMax;
@@ -11,7 +13,7 @@ public class Map {
         map = new Item[xMax] [yMax];
     }
 
-    public Item getMap(int x, int y) {
+    public Item getItem(int x, int y) {
         return map[x][y];
     }
 
@@ -73,5 +75,19 @@ public class Map {
             }
         }
         return counterAnimal;
+    }
+    public Direction getDirectionForMove (Coordinate coordinate){
+        ArrayList <Direction> arrayList = new ArrayList<>();
+        arrayList.add(Direction.LEFT);
+        arrayList.add(Direction.RIGHT);
+        arrayList.add(Direction.UP);
+        arrayList.add(Direction.DOWN);
+        while (arrayList.size() > 0){
+            int index = (int)  (Math.random() * ((arrayList.size() - 0) + 1)) + 0;
+            Direction direction = arrayList.get(index);
+            if (direction == Direction.LEFT && getItem((coordinate.getX()-1), coordinate.getY()) == null){
+                return Direction.LEFT;
+            }
+        }
     }
 }
