@@ -124,21 +124,23 @@ public  class Main {
                 for (int x = 0; x < map.getxMax(); x++) {
                     if (map.getItem(x, y) instanceof Animal) {
                         Direction direction = map.getDirectionForMove(new Coordinate(x, y));
-                        int spid = ((Animal) map.getItem(x, y)).getSpeed();
-                        if (direction != Direction.STOP) {
-                            for (int i = 1; i <= spid; i++) {
-                                if (direction == Direction.LEFT) {
-                                    if (map.getItem((x - i), y) == null && x - 1 >= 0) {
-                                    map.setItem(map.getItem(x, y), new Coordinate((x - 1), y));
-                                    map.removeItem(new Coordinate(x, y));
-                                    }
-                                } else if (direction == Direction.RIGHT ) {
-                                    if (map.getItem((x + i), y) == null && x + 1 <= map.getxMax()) {
+                        int spid = ((MovableItem) map.getItem(x, y)).getSpeed();
+                        if (direction == Direction.LEFT) {
+                            int counter = 0;
+                            for (int newX = x-1; newX >= x - spid; newX--) {
+                                if (newX >= 0 && map.getItem((newX), y) == null) {
+                                    counter++;
+                                }
+                            }
+                            map.setItem(map.getItem(x, y), new Coordinate((x - counter), y));
+                            map.removeItem(new Coordinate(x, y));
+                        } else if (direction == Direction.RIGHT ) {
+                                    if (map.getItem((x + i), y) == null && x + 1 < map.getxMax()) {
                                     map.setItem(map.getItem(x, y), new Coordinate((x + 1), y));
                                     map.removeItem(new Coordinate(x, y));
                                     }
                                 } else if (direction == Direction.UP) {
-                                    if (map.getItem(x, (y + i)) == null && y + 1 <= map.getyMax()) {
+                                    if (map.getItem(x, (y + i)) == null && y + 1 < map.getyMax()) {
                                         map.setItem(map.getItem(x, y), new Coordinate(x, (y + 1)));
                                         map.removeItem(new Coordinate(x, y));
                                     }
@@ -155,6 +157,10 @@ public  class Main {
             }
             System.out.println(map.toString());
         }
+//       Map map = new Map(1,1);
+//       Bear bear = new Bear(new Coordinate(0,0),2,100,50);
+//       map.setItem(bear,bear.getCoordinate());
+//        System.out.println(map.getDirectionForMove(bear.getCoordinate()));
     }
 }
 
