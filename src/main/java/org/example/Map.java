@@ -87,7 +87,24 @@ public class Map {
             Direction direction = arrayList.get(index);
             if (direction == Direction.LEFT && getItem((coordinate.getX()-1), coordinate.getY()) == null){
                 return Direction.LEFT;
+            } else {
+                arrayList.remove(index);
+            }
+            index = (int)  (Math.random() * ((arrayList.size() - 0) + 1)) + 0;
+            direction = arrayList.get(index);
+            if (direction == Direction.RIGHT && getItem((coordinate.getX()+1), coordinate.getY()) == null) {
+                return Direction.RIGHT;
+            } else {
+                arrayList.remove(index);
+            }
+            index = (int)  (Math.random() * ((arrayList.size() - 0) + 1)) + 0;
+            direction = arrayList.get(index);
+            if (direction == Direction.UP && getItem((coordinate.getX()), coordinate.getY() + 1) == null) {
+                return Direction.UP;
+            } else if (direction == Direction.DOWN && getItem((coordinate.getX()), coordinate.getY() - 1) == null) {
+                return Direction.DOWN;
             }
         }
+        return Direction.STOP;
     }
 }
