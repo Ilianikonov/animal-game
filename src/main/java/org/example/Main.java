@@ -128,41 +128,48 @@ public  class Main {
                         if (direction == Direction.LEFT) {
                             int counter = 0;
                             for (int newX = x-1; newX >= x - spid; newX--) {
-                                if (newX >= 0 && map.getItem((newX), y) == null) {
+                                if (newX >= 0 && map.getItem(newX, y) == null) {
                                     counter++;
                                 }
                             }
-                            map.setItem(map.getItem(x, y), new Coordinate((x - counter), y));
+                            map.setItem(map.getItem(x, y), new Coordinate(x - counter, y));
                             map.removeItem(new Coordinate(x, y));
                         } else if (direction == Direction.RIGHT ) {
-                                    if (map.getItem((x + i), y) == null && x + 1 < map.getxMax()) {
-                                    map.setItem(map.getItem(x, y), new Coordinate((x + 1), y));
-                                    map.removeItem(new Coordinate(x, y));
-                                    }
-                                } else if (direction == Direction.UP) {
-                                    if (map.getItem(x, (y + i)) == null && y + 1 < map.getyMax()) {
-                                        map.setItem(map.getItem(x, y), new Coordinate(x, (y + 1)));
-                                        map.removeItem(new Coordinate(x, y));
-                                    }
-                                } else {
-                                    if (map.getItem(x, (y - i)) == null && y - 1 >= 0) {
-                                        map.setItem(map.getItem(x, y), new Coordinate(x, (y - 1)));
-                                        map.removeItem(new Coordinate(x, y));
-                                    }
+                            int counter = 0;
+                            for (int newX = x+1; newX <= x + spid; newX++) {
+                                if (newX < map.getxMax() && map.getItem(newX, y) == null) {
+                                    counter++;
                                 }
                             }
+                            map.setItem(map.getItem(x, y), new Coordinate(x + counter, y));
+                            map.removeItem(new Coordinate(x, y));
+                        } else if (direction == Direction.UP) {
+                            int counter = 0;
+                            for (int newY = y+1; newY <= y + spid; newY++) {
+                                if (newY < map.getyMax() && map.getItem(x, newY) == null) {
+                                    counter++;
+                                }
+                            }
+                            map.setItem(map.getItem(x, y), new Coordinate(x, y + counter));
+                            map.removeItem(new Coordinate(x, y));
+                        } else if (direction == Direction.DOWN){
+                            int counter = 0;
+                            for (int newY = y - 1; newY >= y - spid; newY--) {
+                                if (newY >= 0 && map.getItem(x, newY) == null) {
+                                    counter++;
+                                }
+                            }
+                            map.setItem(map.getItem(x, y), new Coordinate(x, y - counter));
+                            map.removeItem(new Coordinate(x, y));
                         }
                     }
                 }
             }
             System.out.println(map.toString());
         }
-//       Map map = new Map(1,1);
-//       Bear bear = new Bear(new Coordinate(0,0),2,100,50);
-//       map.setItem(bear,bear.getCoordinate());
-//        System.out.println(map.getDirectionForMove(bear.getCoordinate()));
     }
 }
+
 
 
 
