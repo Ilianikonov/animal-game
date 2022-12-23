@@ -13,8 +13,8 @@ public class Map {
         map = new Item[xMax] [yMax];
     }
 
-    public Item getItem(int x, int y) {
-        return map[x][y];
+    public Item getItem(Coordinate coordinate) {
+        return map[coordinate.getY()][coordinate.getX()];
     }
 
     public int getxMax() {
@@ -29,6 +29,9 @@ public class Map {
     }
     public void removeItem (Coordinate coordinate){
         map[coordinate.getY()][coordinate.getX()] = null;
+    }
+    public Item[][] getMap (){
+        return map;
     }
 
     @Override
@@ -88,25 +91,25 @@ public class Map {
             int x = coordinate.getX();
             int y = coordinate.getY();
             if (direction == Direction.LEFT) {
-                if (x - 1 >= 0 && getItem(x - 1, y) == null) {
+                if (x - 1 >= 0 && getItem(new Coordinate(x - 1, y)) == null) {
                     return Direction.LEFT;
                 } else {
                     arrayList.remove(index);
                 }
             } else if (direction == Direction.RIGHT) {
-                if (x + 1 < getxMax() && getItem(x + 1, y) == null) {
+                if (x + 1 < getxMax() && getItem(new Coordinate(x + 1, y)) == null) {
                     return Direction.RIGHT;
                 } else {
                     arrayList.remove(index);
                 }
             } else if (direction == Direction.UP) {
-                if (y + 1 < getyMax() && getItem(x, y + 1) == null) {
+                if (y - 1 >= 0 && getItem(new Coordinate(x, y - 1)) == null) {
                 return Direction.UP;
                 } else {
                     arrayList.remove(index);
                 }
             } else if (direction == Direction.DOWN) {
-                if (y - 1 >= 0 && getItem(x, y - 1) == null) {
+                if (y + 1 < getyMax() && getItem(new Coordinate(x, y + 1)) == null) {
                     return Direction.DOWN;
                 } else {
                     arrayList.remove(index);

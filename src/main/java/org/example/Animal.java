@@ -1,6 +1,6 @@
 package org.example;
 
-public class Animal extends MovableItem {
+public abstract class Animal extends MovableItem {
     private int hp;
     private int foodLevel;
 

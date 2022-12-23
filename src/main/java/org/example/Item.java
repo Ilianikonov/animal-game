@@ -1,6 +1,6 @@
 package org.example;
 
-public class Item {
+public abstract class Item {
    private Coordinate coordinate;
 
    public Coordinate getCoordinate() {

@@ -1,6 +1,6 @@
 package org.example;
 
-public class MovableItem extends Item{
+public abstract class MovableItem extends Item{
     private int speed;
     public MovableItem(Coordinate coordinate) {
         super(coordinate);
