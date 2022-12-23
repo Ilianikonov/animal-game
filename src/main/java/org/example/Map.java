@@ -83,11 +83,36 @@ public class Map {
         arrayList.add(Direction.UP);
         arrayList.add(Direction.DOWN);
         while (arrayList.size() > 0){
-            int index = (int)  (Math.random() * ((arrayList.size() - 0) + 1)) + 0;
+            int index = (int)  (Math.random() * (((arrayList.size()-1) - 0) + 1)) + 0;
             Direction direction = arrayList.get(index);
-            if (direction == Direction.LEFT && getItem((coordinate.getX()-1), coordinate.getY()) == null){
-                return Direction.LEFT;
+            int x = coordinate.getX();
+            int y = coordinate.getY();
+            if (direction == Direction.LEFT) {
+                if (x - 1 >= 0 && getItem(x - 1, y) == null) {
+                    return Direction.LEFT;
+                } else {
+                    arrayList.remove(index);
+                }
+            } else if (direction == Direction.RIGHT) {
+                if (x + 1 < getxMax() && getItem(x + 1, y) == null) {
+                    return Direction.RIGHT;
+                } else {
+                    arrayList.remove(index);
+                }
+            } else if (direction == Direction.UP) {
+                if (y + 1 < getyMax() && getItem(x, y + 1) == null) {
+                return Direction.UP;
+                } else {
+                    arrayList.remove(index);
+                }
+            } else if (direction == Direction.DOWN) {
+                if (y - 1 >= 0 && getItem(x, y - 1) == null) {
+                    return Direction.DOWN;
+                } else {
+                    arrayList.remove(index);
+                }
             }
         }
+        return Direction.STOP;
     }
 }

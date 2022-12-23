@@ -119,39 +119,57 @@ public  class Main {
        //     }
        //     Thread.sleep(1000);
         Map map = MapGenerator.generateMap(10,4,4,4,4,4,10,10);
-        double veroatnostDvigPravo = 0.75;
-        double veroatnostDvigVerh = 0.25;
-        double veroatnostDvigNiz = 0.5;
-        double veroatnostDvig = 0.5;
         while (map.countAnimal() > 0) {
             for (int y = 0; y < map.getyMax(); y++) {
                 for (int x = 0; x < map.getxMax(); x++) {
                     if (map.getItem(x, y) instanceof Animal) {
                         Direction direction = map.getDirectionForMove(new Coordinate(x, y));
-                        if (direction == Direction.UP) {
-                        }
-                            double veroatnostNapravlen = Math.random();
-                            if (veroatnostDvigVerh > veroatnostNapravlen && (y + (((Animal) map.getItem(x, y)).getSpeed()) < map.getyMax())) {
-                                map.setItem(map.getItem(x, y), new Coordinate(x, (y + (((Animal) map.getItem(x, y)).getSpeed()))));
-                                map.removeItem(new Coordinate(x, y));
-                            } else if (veroatnostDvigNiz > veroatnostNapravlen && (y - (((Animal) map.getItem(x, y)).getSpeed()) >= 0)) {
-                                map.setItem(map.getItem(x, y), new Coordinate(x, (y - (((Animal) map.getItem(x, y)).getSpeed()))));
-                                map.removeItem(new Coordinate(x, y));
-                            } else if (veroatnostDvigPravo > veroatnostNapravlen && (x + (((Animal) map.getItem(x, y)).getSpeed()) < map.getxMax())) {
-                                map.setItem(map.getItem(x, y), new Coordinate((x + (((Animal) map.getItem(x, y)).getSpeed())), y));
-                                map.removeItem(new Coordinate(x, y));
-                            } else if ((x - (((Animal) map.getItem(x, y)).getSpeed()) >= 0)) {
-                                map.setItem(map.getItem(x, y), new Coordinate((x - (((Animal) map.getItem(x, y)).getSpeed())), y));
-                                map.removeItem(new Coordinate(x, y));
+                        int spid = ((MovableItem) map.getItem(x, y)).getSpeed();
+                        if (direction == Direction.LEFT) {
+                            int counter = 0;
+                            for (int newX = x-1; newX >= x - spid; newX--) {
+                                if (newX >= 0 && map.getItem(newX, y) == null) {
+                                    counter++;
+                                }
                             }
+                            map.setItem(map.getItem(x, y), new Coordinate(x - counter, y));
+                            map.removeItem(new Coordinate(x, y));
+                        } else if (direction == Direction.RIGHT ) {
+                            int counter = 0;
+                            for (int newX = x+1; newX <= x + spid; newX++) {
+                                if (newX < map.getxMax() && map.getItem(newX, y) == null) {
+                                    counter++;
+                                }
+                            }
+                            map.setItem(map.getItem(x, y), new Coordinate(x + counter, y));
+                            map.removeItem(new Coordinate(x, y));
+                        } else if (direction == Direction.UP) {
+                            int counter = 0;
+                            for (int newY = y+1; newY <= y + spid; newY++) {
+                                if (newY < map.getyMax() && map.getItem(x, newY) == null) {
+                                    counter++;
+                                }
+                            }
+                            map.setItem(map.getItem(x, y), new Coordinate(x, y + counter));
+                            map.removeItem(new Coordinate(x, y));
+                        } else if (direction == Direction.DOWN){
+                            int counter = 0;
+                            for (int newY = y - 1; newY >= y - spid; newY--) {
+                                if (newY >= 0 && map.getItem(x, newY) == null) {
+                                    counter++;
+                                }
+                            }
+                            map.setItem(map.getItem(x, y), new Coordinate(x, y - counter));
+                            map.removeItem(new Coordinate(x, y));
+                        }
                     }
-
                 }
             }
             System.out.println(map.toString());
         }
     }
 }
+
 
 
 
