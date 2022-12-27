@@ -2,6 +2,8 @@ package org.example;
 
 public  class Main {
     public static void main(String[] args) throws InterruptedException {
+        GameCore gameCore = new GameCore();
+        gameCore.start();
 
        // Fox foks = new Fox();
        // foks.setX(7);
