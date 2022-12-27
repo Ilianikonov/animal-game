@@ -15,7 +15,7 @@ public class GameCore {
         }
     }
 
-    private void doMove(MovableItem movableItem, Map map) {
+    public void doMove(MovableItem movableItem, Map map) {
         Direction direction = map.getDirectionForMove(movableItem.getCoordinate());
         int speed = movableItem.getSpeed();
         int finalX = movableItem.getCoordinate().getX();
@@ -23,7 +23,7 @@ public class GameCore {
         if (direction == Direction.LEFT) {
             int currentX = movableItem.getCoordinate().getX() - 1;
             for (int i = 0; i < speed - 1; i++) {
-                if (currentX >= 0 && map.getItem(new Coordinate(currentX--, movableItem.getCoordinate().getY())) == null) {
+                if (currentX >= 0 && map.getItem(new Coordinate(currentX, movableItem.getCoordinate().getY())) == null) {
                     currentX--;
                 } else {
                     finalX = currentX + 1;
@@ -33,7 +33,7 @@ public class GameCore {
         } else if (direction == Direction.RIGHT) {
             int currentX = movableItem.getCoordinate().getX() + 1;
             for (int i = 0; i < speed - 1; i++) {
-                if (currentX < map.getxMax() && map.getItem(new Coordinate(currentX++, movableItem.getCoordinate().getY())) == null) {
+                if (currentX < map.getxMax() && map.getItem(new Coordinate(currentX, movableItem.getCoordinate().getY())) == null) {
                     currentX++;
                 } else {
                     finalX = currentX - 1;
@@ -43,7 +43,7 @@ public class GameCore {
         } else if (direction == Direction.UP) {
             int currentY = movableItem.getCoordinate().getY() - 1;
             for (int i = 0; i < speed - 1; i++) {
-                if (currentY >= 0 && map.getItem(new Coordinate(movableItem.getCoordinate().getX(), currentY--)) == null) {
+                if (currentY >= 0 && map.getItem(new Coordinate(movableItem.getCoordinate().getX(), currentY)) == null) {
                     currentY--;
                 } else {
                     finalY = currentY + 1;
@@ -51,9 +51,9 @@ public class GameCore {
                 }
             }
         } else if (direction == Direction.DOWN) {
-            int currentY = movableItem.getCoordinate().getY();
+            int currentY = movableItem.getCoordinate().getY() + 1;
             for (int i = 0; i < speed - 1; i++) {
-                if (currentY < map.getyMax() && map.getItem(new Coordinate(movableItem.getCoordinate().getX(), currentY++)) == null) {
+                if (currentY < map.getyMax() && map.getItem(new Coordinate(movableItem.getCoordinate().getX(), currentY)) == null) {
                     currentY++;
                 } else {
                     finalY = currentY - 1;
