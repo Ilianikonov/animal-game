@@ -2,6 +2,8 @@ package org.example;
 
 public  class Main {
     public static void main(String[] args) throws InterruptedException {
+        GameCore gameCore = new GameCore();
+        gameCore.start();
 
        // Fox foks = new Fox();
        // foks.setX(7);
@@ -118,55 +120,7 @@ public  class Main {
        //         }
        //     }
        //     Thread.sleep(1000);
-        Map map = MapGenerator.generateMap(10,4,4,4,4,4,10,10);
-        while (map.countAnimal() > 0) {
-            for (int y = 0; y < map.getyMax(); y++) {
-                for (int x = 0; x < map.getxMax(); x++) {
-                    if (map.getItem(x, y) instanceof Animal) {
-                        Direction direction = map.getDirectionForMove(new Coordinate(x, y));
-                        int spid = ((MovableItem) map.getItem(x, y)).getSpeed();
-                        if (direction == Direction.LEFT) {
-                            int counter = 0;
-                            for (int newX = x-1; newX >= x - spid; newX--) {
-                                if (newX >= 0 && map.getItem(newX, y) == null) {
-                                    counter++;
-                                }
-                            }
-                            map.setItem(map.getItem(x, y), new Coordinate(x - counter, y));
-                            map.removeItem(new Coordinate(x, y));
-                        } else if (direction == Direction.RIGHT ) {
-                            int counter = 0;
-                            for (int newX = x+1; newX <= x + spid; newX++) {
-                                if (newX < map.getxMax() && map.getItem(newX, y) == null) {
-                                    counter++;
-                                }
-                            }
-                            map.setItem(map.getItem(x, y), new Coordinate(x + counter, y));
-                            map.removeItem(new Coordinate(x, y));
-                        } else if (direction == Direction.UP) {
-                            int counter = 0;
-                            for (int newY = y+1; newY <= y + spid; newY++) {
-                                if (newY < map.getyMax() && map.getItem(x, newY) == null) {
-                                    counter++;
-                                }
-                            }
-                            map.setItem(map.getItem(x, y), new Coordinate(x, y + counter));
-                            map.removeItem(new Coordinate(x, y));
-                        } else if (direction == Direction.DOWN){
-                            int counter = 0;
-                            for (int newY = y - 1; newY >= y - spid; newY--) {
-                                if (newY >= 0 && map.getItem(x, newY) == null) {
-                                    counter++;
-                                }
-                            }
-                            map.setItem(map.getItem(x, y), new Coordinate(x, y - counter));
-                            map.removeItem(new Coordinate(x, y));
-                        }
-                    }
-                }
-            }
-            System.out.println(map.toString());
-        }
+
     }
 }
 
