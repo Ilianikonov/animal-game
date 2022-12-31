@@ -21,42 +21,42 @@ public class GameCore {
         int finalX = movableItem.getCoordinate().getX();
         int finalY = movableItem.getCoordinate().getY();
         if (direction == Direction.LEFT) {
-            int currentX = movableItem.getCoordinate().getX() - 1;
-            for (int i = 0; i < speed - 1; i++) {
+            int currentX = movableItem.getCoordinate().getX();
+            for (int i = 0; i < speed; i++) {
+                currentX--;
                 if (currentX >= 0 && map.getItem(new Coordinate(currentX, movableItem.getCoordinate().getY())) == null) {
-                    currentX--;
+                    finalX--;
                 } else {
-                    finalX = currentX + 1;
                     break;
                 }
             }
         } else if (direction == Direction.RIGHT) {
-            int currentX = movableItem.getCoordinate().getX() + 1;
-            for (int i = 0; i < speed - 1; i++) {
+            int currentX = movableItem.getCoordinate().getX();
+            for (int i = 0; i < speed; i++) {
+                currentX++;
                 if (currentX < map.getxMax() && map.getItem(new Coordinate(currentX, movableItem.getCoordinate().getY())) == null) {
-                    currentX++;
+                    finalX++;
                 } else {
-                    finalX = currentX - 1;
                     break;
                 }
             }
         } else if (direction == Direction.UP) {
-            int currentY = movableItem.getCoordinate().getY() - 1;
-            for (int i = 0; i < speed - 1; i++) {
+            int currentY = movableItem.getCoordinate().getY();
+            for (int i = 0; i < speed; i++) {
+                currentY--;
                 if (currentY >= 0 && map.getItem(new Coordinate(movableItem.getCoordinate().getX(), currentY)) == null) {
-                    currentY--;
+                    finalY--;
                 } else {
-                    finalY = currentY + 1;
-                    return;
+                    break;
                 }
             }
         } else if (direction == Direction.DOWN) {
             int currentY = movableItem.getCoordinate().getY() + 1;
-            for (int i = 0; i < speed - 1; i++) {
+            for (int i = 0; i < speed; i++) {
+                currentY++;
                 if (currentY < map.getyMax() && map.getItem(new Coordinate(movableItem.getCoordinate().getX(), currentY)) == null) {
-                    currentY++;
+                    finalY++;
                 } else {
-                    finalY = currentY - 1;
                     break;
                 }
             }
@@ -65,7 +65,7 @@ public class GameCore {
         movableItem.setCoordinate(new Coordinate(finalX,finalY));
         map.setItem(movableItem,movableItem.getCoordinate());
     }
-    private void hunterActions(MovableItem movableItem, Map map){
+    public void hunterActions(MovableItem movableItem, Map map){
         int x = movableItem.getCoordinate().getX();
         int y = movableItem.getCoordinate().getY();
         for (int i = x - 1; i <= x + 1; i++){
